@@ -20,19 +20,22 @@ const Header = () => {
   return (
     <div id="header" className="header">
       <div className="header__content">
-        <Link to="/">
-          <div className="header__font">WATER THE TREES</div>
-        </Link>
-
-        <button
-          type="button"
-          className="header__btn-menu"
-          aria-controls="wtt-menu"
-          aria-haspopup="true"
-          onClick={handleClick}
-        >
-          &#9776;
-        </button>
+        <div className="header__item">
+          <Link to="/">
+            <div className="header__font">WATER THE TREES</div>
+          </Link>
+        </div>
+        <div className="header__item">
+          <button
+            type="button"
+            className="header__btn-menu"
+            aria-controls="wtt-menu"
+            aria-haspopup="true"
+            onClick={handleClick}
+          >
+            &#9776;
+          </button>
+        </div>
 
         <Menu
           id="wtt-menu"
@@ -41,14 +44,13 @@ const Header = () => {
           open={Boolean(anchorEl)}
           onClose={handleClose}
         >
-          {isAuthenticated
-            && (
-              <MenuItem onClick={handleClose}>
-                <Link to="/userprofile" className="header__link">
-                  <HeaderButton menuItem="User Profile" />
-                </Link>
-              </MenuItem>
-            )}
+          {isAuthenticated && (
+            <MenuItem onClick={handleClose}>
+              <Link to="/userprofile" className="header__link">
+                <HeaderButton menuItem="User Profile" />
+              </Link>
+            </MenuItem>
+          )}
 
           <MenuItem onClick={handleClose}>
             <Link to="/" className="header__link">
@@ -84,10 +86,7 @@ const Header = () => {
 };
 
 const HeaderButton = ({ menuItem }) => (
-  <button
-    type="button"
-    className="btn btn-success btn-block"
-  >
+  <button type="button" className="btn btn-success btn-block">
     {menuItem}
   </button>
 );
