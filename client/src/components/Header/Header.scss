@@ -6,39 +6,46 @@
 .header {
   position: fixed;
   top: 0;
-  width: 100%;
+  // width: 100%;
   /* put this above the map drawer but below modal dialogs */
   z-index: 1250 !important;
+  
 }
 
 .header__content {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  margin: 10px 10px 0 10px;
+  font-size: 2.2rem;
+}
+
+.header__btn-menu {
+  border: 1px gray;
+  border-radius: 5px;
+  outline: none;
+  background-color: white;
+  margin: 0 10px 0 0;
+  padding: 0 20px;
+  -moz-box-shadow: 0 0 2px rgba(0,0,0,.1);
+  -webkit-box-shadow: 0 0 2px rgb(0 0 0 / 10%);
+  box-shadow: 0 0 0 2pxrgba(0,0,0,.1);
 }
 
 .header__font{
   font-family: 'wtt-thin', Arial, sans-serif, "PT Sans";
-  color: white;
   white-space: nowrap;
   letter-spacing: -3px;
-  font-size: 2.3rem;
   word-spacing: 0.6rem;
-
+  color: black;
+  background-color: white;
+  border-radius: 5px;
+  padding: 0 0.5rem;
+  -moz-box-shadow: 0 0 2px rgba(0,0,0,.1);
+  -webkit-box-shadow: 0 0 2px rgb(0 0 0 / 10%);
+  box-shadow: 0 0 0 2pxrgba(0,0,0,.1);
 }
 
-.header__item{
-  display: inline-block;
-  width: auto;
-  height: auto;
-  max-width: 100%;
-  max-height: 100%;
-  vertical-align: middle;
-  background: linear-gradient(to top,
-  transparent 30%, #4A5D23 30% 10%, #006A4E 45% 80%, darkgreen 80% 90%, black 90%);
-  padding: 1rem;
-  margin-bottom: 1rem;
-}
 
 .header__font::first-letter {
   letter-spacing: 0;
@@ -65,32 +72,15 @@
   width: 100%;
 }
 
-.header .MuiListItem-gutters {
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-.header__btn-menu {
-  margin: 0em;
-  padding: 0;
-  border-width: 0;
-  color: white;
-  background: none;
-  border: none;
-  outline: none;
-  font-size: 2.6rem;
-}
-
 @media only screen and (max-width: 768px) {
   .header__icon {
     width: 70vw;
   }
   .header__font{
-    font-size: 1.5rem;
     word-spacing: 0.5rem;
   }
 
-  .header__btn-menu {
-    font-size: 2rem;
+  .header__content {
+    font-size: 1.8rem;
   }
 }

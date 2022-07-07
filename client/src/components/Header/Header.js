@@ -21,11 +21,6 @@ const Header = () => {
     <div id="header" className="header">
       <div className="header__content">
         <div className="header__item">
-          <Link to="/">
-            <div className="header__font">WATER THE TREES</div>
-          </Link>
-        </div>
-        <div className="header__item">
           <button
             type="button"
             className="header__btn-menu"
@@ -36,51 +31,56 @@ const Header = () => {
             &#9776;
           </button>
         </div>
-
-        <Menu
-          id="wtt-menu"
-          anchorEl={anchorEl}
-          keepMounted
-          open={Boolean(anchorEl)}
-          onClose={handleClose}
-        >
-          {isAuthenticated && (
-            <MenuItem onClick={handleClose}>
-              <Link to="/userprofile" className="header__link">
-                <HeaderButton menuItem="User Profile" />
-              </Link>
-            </MenuItem>
-          )}
-
-          <MenuItem onClick={handleClose}>
-            <Link to="/" className="header__link">
-              <HeaderButton menuItem="Map" />
-            </Link>
-          </MenuItem>
-
-          <MenuItem onClick={handleClose}>
-            <Link to="/about" className="header__link">
-              <HeaderButton menuItem="About" />
-            </Link>
-          </MenuItem>
-
-          <MenuItem onClick={handleClose}>
-            <Link to="/contact" className="header__link">
-              <HeaderButton menuItem="Contact" />
-            </Link>
-          </MenuItem>
-
-          <MenuItem onClick={handleClose}>
-            <Link to="/data" className="header__link">
-              <HeaderButton menuItem="Data" />
-            </Link>
-          </MenuItem>
-
-          <MenuItem onClick={handleClose}>
-            <AuthButton />
-          </MenuItem>
-        </Menu>
+        <div className="header__item">
+          <Link to="/">
+            <div className="header__font">WATER THE TREES</div>
+          </Link>
+        </div>
       </div>
+
+      <Menu
+        id="wtt-menu"
+        anchorEl={anchorEl}
+        keepMounted
+        open={Boolean(anchorEl)}
+        onClose={handleClose}
+      >
+        {isAuthenticated && (
+          <MenuItem onClick={handleClose}>
+            <Link to="/userprofile" className="header__link">
+              <HeaderButton menuItem="User Profile" />
+            </Link>
+          </MenuItem>
+        )}
+
+        <MenuItem onClick={handleClose}>
+          <Link to="/" className="header__link">
+            <HeaderButton menuItem="Map" />
+          </Link>
+        </MenuItem>
+
+        <MenuItem onClick={handleClose}>
+          <Link to="/about" className="header__link">
+            <HeaderButton menuItem="About" />
+          </Link>
+        </MenuItem>
+
+        <MenuItem onClick={handleClose}>
+          <Link to="/contact" className="header__link">
+            <HeaderButton menuItem="Contact" />
+          </Link>
+        </MenuItem>
+
+        <MenuItem onClick={handleClose}>
+          <Link to="/data" className="header__link">
+            <HeaderButton menuItem="Data" />
+          </Link>
+        </MenuItem>
+
+        <MenuItem onClick={handleClose}>
+          <AuthButton />
+        </MenuItem>
+      </Menu>
     </div>
   );
 };

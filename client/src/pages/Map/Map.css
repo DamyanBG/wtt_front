@@ -6,8 +6,13 @@
 /* shift the top map control areas down to account for the header, using rem in case the overall
    font size changes */
 .mapboxgl-ctrl-top-left, .mapboxgl-ctrl-top-right {
-  top: 3.7rem
+  top: 3.7rem;
+  float: none;
 }
+
+/* .mapboxgl-ctrl {
+  float: none;
+} */
 
 /* an empty button gets inserted in the attribution element for some reason, so hide it */
 .mapboxgl-ctrl-attrib-button {
