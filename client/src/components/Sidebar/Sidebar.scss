@@ -1,13 +1,69 @@
-.sidebar {
- background-color: transparent;
- position: fixed;
- top: 85px;
- left: 0;
- padding-left: 10px;
- width: 72px;
+@font-face {
+  font-family: 'wtt-thin';
+  src: local('wtt-thin'), url(../../assets/fonts/WTT-THIN.ttf) format('truetype');
 }
 
-.sidebar__content {
- font-weight: 900;
- font-family: 'Roboto Mono', monospace;
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&display=swap');
+
+
+#Sidebar {
+  .title__font{
+    font-family: 'wtt-thin', Arial, sans-serif, "PT Sans";
+    color: black;
+    white-space: nowrap;
+    letter-spacing: -3px;
+    font-size: .95rem;
+    word-spacing: 0.6rem;
+  }
+  
+  .sidebar__logo {
+    width: 35px;
+    height: 35px;
+  }
+  
+  .MuiListItemIcon-root {
+    svg {
+      color: #323232;
+      width: 24px;
+      height: 24px;
+    }
+  }
+  
+  .MuiListItemText-root {
+    .MuiTypography-root {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      color: #323232;
+    }
+  }
+  
+  .MuiButtonBase-root:hover {
+    .MuiTypography-root {
+      font-weight: 500;
+    }
+  
+    .MuiListItemIcon-root {
+      svg {
+        color: #3FAB45;
+      }
+    }
+  }
+  
+  .MuiListItem-root:hover {
+    text-decoration: none;
+  }
+  
+  
+  .toggle__button {
+    color: white;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background-color: #3FAB45;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
 }
