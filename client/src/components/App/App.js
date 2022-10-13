@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import ErrorBoundary from '@/components/ErrorBoundary/ErrorBoundary';
-// import Header from '@/components/Header/Header';
+import Header from '@/components/Header/Header';
 import Sidebar from '@/components/Sidebar/Sidebar';
 
 import {
@@ -53,7 +53,7 @@ function App() {
         <QueryClientProvider client={queryClient}>
           <BrowserRouter basename="/">
             <Auth0ProviderWithRedirect>
-              {/* <Header /> */}
+              <Header />
               <Sidebar />
               <Suspense fallback={<Loading />}>
                 <Routes>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
+import { styled } from '@mui/material/styles';
 import useAuthUtils from '@/components/Auth/useAuthUtils';
 import './Sidebar.scss';
 
@@ -14,6 +15,7 @@ import {
   useMediaQuery,
   Grid,
   Typography,
+  Box,
 } from '@mui/material';
 
 import MapIcon from '@mui/icons-material/Map';
@@ -23,16 +25,18 @@ import AssessmentIcon from '@mui/icons-material/Assessment';
 import ForestOutlinedIcon from '@mui/icons-material/ForestOutlined';
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 import GrassIcon from '@mui/icons-material/Grass';
-import HelpOutlineOutlinedIcon from '@mui/icons-material/HelpOutlineOutlined';
-import SettingsIcon from '@mui/icons-material/Settings';
 import LoginIcon from '@mui/icons-material/Login';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import wttLogo from '@/assets/images/addtree/treefattrunk.png';
+// import HelpOutlineOutlinedIcon from '@mui/icons-material/HelpOutlineOutlined';
+// import SettingsIcon from '@mui/icons-material/Settings';
 
 export default function Sidebar() {
   const { isAuthenticated, logout } = useAuth0();
   const { loginToCurrentPage } = useAuthUtils();
+  const { user = {} } = useAuth0();
+  const { nickname, email, picture } = user;
 
   const [open, setOpen] = React.useState(false);
 
@@ -54,8 +58,8 @@ export default function Sidebar() {
     setOpen(isLarge);
   }, [isLarge]);
 
-  //Data to be displayed from the top of the sidebar
-  const sidebarTop = [
+  //Top section of sidebar
+  let sidebarTop = [
     {
       title: 'Navigation',
       items: [
@@ -90,26 +94,33 @@ export default function Sidebar() {
     },
   ];
 
-  //Data to be displayed from the bottom of the sidebar
+  // Remove 'Personal' section from sidebar if no logged in user is present
+  if (!Object.keys(user).length) {
+    sidebarTop = sidebarTop.filter(
+      (item) => item.title === 'Navigation' || item.title === 'Input',
+    );
+  }
+
+  //Bottom section of the sidebar
   const sidebarBottom = [
-    {
-      title: 'General',
-      items: [
-        {
-          text: 'Help',
-          icon: <HelpOutlineOutlinedIcon />,
-          path: '/',
-        },
-        { text: 'Settings', icon: <SettingsIcon />, path: '/' },
-      ],
-    },
+    // {
+    //   title: 'General',
+    //   items: [
+    //     {
+    //       text: 'Help',
+    //       icon: <HelpOutlineOutlinedIcon />,
+    //       path: '/',
+    //     },
+    //     { text: 'Settings', icon: <SettingsIcon />, path: '/' },
+    //   ],
+    // },
     {
       title: 'Auth',
       items: [
         {
-          text: isAuthenticated ? 'Logout' : 'Login',
+          text: 'Login',
           icon: <LoginIcon />,
-          path: null,
+          path: Object.keys(user).length ? '/userprofile' : null,
         },
       ],
     },
@@ -124,6 +135,7 @@ export default function Sidebar() {
       id="Sidebar"
       sx={{
         width: open ? drawerOpen : drawerClosed,
+        display: { xs: 'none', sm: 'flex' },
       }}
       PaperProps={{
         sx: {
@@ -183,6 +195,7 @@ export default function Sidebar() {
           <List disablePadding>
             {sidebarTop.map((list) => {
               const { title, items } = list;
+
               return (
                 <div key={title}>
                   <Typography
@@ -269,31 +282,75 @@ export default function Sidebar() {
                         to={path ? path : null}
                         sx={{ padding: open ? '4px 24px' : '4px 16px' }}
                       >
-                        <ListItemButton
-                          disableGutters
-                          onClick={() =>
-                            text === 'Logout' || text === 'Login'
-                              ? handleClick()
-                              : null
-                          }
-                          sx={{
-                            justifyContent: 'center',
-                            maxWidth: open ? '200px' : '48px',
-                          }}
-                        >
-                          <ListItemIcon
+                        {Object.keys(user).length ? (
+                          <ListItemButton
+                            disableGutters
                             sx={{
-                              minWidth: '40px',
-                              justifyContent: open ? 'start' : 'center',
+                              justifyContent: 'center',
+                              maxWidth: open ? '200px' : '48px',
                             }}
                           >
-                            {icon}
-                          </ListItemIcon>
-                          <ListItemText
-                            primary={text}
-                            sx={{ display: open ? 'inline' : 'none' }}
-                          />
-                        </ListItemButton>
+                            <Grid container spacing={2}>
+                              <Grid item>
+                                <Box
+                                  component="img"
+                                  src={picture}
+                                  alt="Avatar"
+                                  sx={{
+                                    width: '3rem',
+                                    height: '3rem',
+                                    borderRadius: '5px',
+                                  }}
+                                />
+                              </Grid>
+                              <Grid item>
+                                <Typography
+                                  sx={{
+                                    display: open ? 'flex' : 'none',
+                                    fontWeight: 'bold',
+                                    color: '#323232',
+                                  }}
+                                >
+                                  {nickname}
+                                </Typography>
+                                <Typography
+                                  sx={{
+                                    display: open ? 'flex' : 'none',
+                                    color: '#323232',
+                                  }}
+                                >
+                                  {email}
+                                </Typography>
+                              </Grid>
+                            </Grid>
+                          </ListItemButton>
+                        ) : (
+                          <ListItemButton
+                            disableGutters
+                            onClick={() =>
+                              text === 'Logout' || text === 'Login'
+                                ? handleClick()
+                                : null
+                            }
+                            sx={{
+                              justifyContent: 'center',
+                              maxWidth: open ? '200px' : '48px',
+                            }}
+                          >
+                            <ListItemIcon
+                              sx={{
+                                minWidth: '40px',
+                                justifyContent: open ? 'start' : 'center',
+                              }}
+                            >
+                              {icon}
+                            </ListItemIcon>
+                            <ListItemText
+                              primary={text}
+                              sx={{ display: open ? 'inline' : 'none' }}
+                            />
+                          </ListItemButton>
+                        )}
                       </ListItem>
                     );
                   })}

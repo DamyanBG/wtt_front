@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Menu, MenuItem } from '@mui/material';
+import { Menu, MenuItem, Box } from '@mui/material';
 import { useAuth0 } from '@auth0/auth0-react';
 import { AuthButton } from '@/components/Auth';
 import './Header.scss';
@@ -18,67 +18,69 @@ const Header = () => {
   const { isAuthenticated } = useAuth0();
 
   return (
-    <div id="header" className="header">
-      <div className="header-content">
-        <Link to="/">
-          <div className="header-font">WATER THE TREES</div>
-        </Link>
+    <Box sx={{ display: { xs: 'flex', sm: 'none' } }}>
+      <div id="header" className="header">
+        <div className="header-content">
+          <Link to="/">
+            <div className="header-font">WATER THE TREES</div>
+          </Link>
 
-        <button
-          type="button"
-          className="header-btn-menu"
-          aria-controls="wtt-menu"
-          aria-haspopup="true"
-          onClick={handleClick}
-        >
-          &#9776;
-        </button>
+          <button
+            type="button"
+            className="header-btn-menu"
+            aria-controls="wtt-menu"
+            aria-haspopup="true"
+            onClick={handleClick}
+          >
+            &#9776;
+          </button>
 
-        <Menu
-          id="wtt-menu"
-          anchorEl={anchorEl}
-          keepMounted
-          open={Boolean(anchorEl)}
-          onClose={handleClose}
-        >
-          {isAuthenticated && (
+          <Menu
+            id="wtt-menu"
+            anchorEl={anchorEl}
+            keepMounted
+            open={Boolean(anchorEl)}
+            onClose={handleClose}
+          >
+            {isAuthenticated && (
+              <MenuItem onClick={handleClose}>
+                <Link to="/userprofile" className="header-link">
+                  <HeaderButton menuItem="User Profile" />
+                </Link>
+              </MenuItem>
+            )}
+
             <MenuItem onClick={handleClose}>
-              <Link to="/userprofile" className="header-link">
-                <HeaderButton menuItem="User Profile" />
+              <Link to="/" className="header-link">
+                <HeaderButton menuItem="Map" />
               </Link>
             </MenuItem>
-          )}
 
-          <MenuItem onClick={handleClose}>
-            <Link to="/" className="header-link">
-              <HeaderButton menuItem="Map" />
-            </Link>
-          </MenuItem>
+            <MenuItem onClick={handleClose}>
+              <Link to="/about" className="header-link">
+                <HeaderButton menuItem="About" />
+              </Link>
+            </MenuItem>
 
-          <MenuItem onClick={handleClose}>
-            <Link to="/about" className="header-link">
-              <HeaderButton menuItem="About" />
-            </Link>
-          </MenuItem>
+            <MenuItem onClick={handleClose}>
+              <Link to="/contact" className="header-link">
+                <HeaderButton menuItem="Contact" />
+              </Link>
+            </MenuItem>
 
-          <MenuItem onClick={handleClose}>
-            <Link to="/contact" className="header-link">
-              <HeaderButton menuItem="Contact" />
-            </Link>
-          </MenuItem>
+            <MenuItem onClick={handleClose}>
+              <Link to="/data" className="header-link">
+                <HeaderButton menuItem="Data" />
+              </Link>
+            </MenuItem>
 
-          <MenuItem onClick={handleClose}>
-            <Link to="/data" className="header-link">
-              <HeaderButton menuItem="Data" />
-            </Link>
-          </MenuItem>
-
-          <MenuItem onClick={handleClose}>
-            <AuthButton />
-          </MenuItem>
-        </Menu>
+            <MenuItem onClick={handleClose}>
+              <AuthButton />
+            </MenuItem>
+          </Menu>
+        </div>
       </div>
-    </div>
+    </Box>
   );
 };
 
